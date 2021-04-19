@@ -17,7 +17,10 @@ class SketchConfig:
 def load_sketchbook_config(path: str):
     with open(path, 'r') as f:
         data = toml.load(f)
-    return SketchbookConfig(
-        sketchbook_root=data['sketchbook_root'],
-        base_url=data['base_url']
-    )
+    return SketchbookConfig(**data)
+
+
+def load_sketch_config(path: str):
+    with open(path, 'r') as f:
+        data = toml.load(f)
+    return SketchConfig(**data)

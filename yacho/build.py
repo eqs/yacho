@@ -4,16 +4,29 @@ import glob
 import logging
 from jinja2 import Environment, PackageLoader
 
-from .config import SketchbookConfig
+from .config import (
+    load_sketch_config, SketchbookConfig
+)
 
 
 class Sketch:
     def __init__(self, path: str):
+
         self.path = path
+
+        if self.has_config():
+            self.cfg = load_sketch_config(
+                os.path.join(self.path, 'yacho.sketch.toml')
+            )
+        else:
+            self.cfg = None
 
     @property
     def name(self):
         return os.path.split(self.path)[1]
+
+    def is_draft(self):
+        return self.cfg is None or self.cfg.draft
 
     def get_pdes(self):
         p = os.path.join(self.path, '*.pde')
@@ -51,8 +64,8 @@ def build(cfg: SketchbookConfig):
     sketch_dirs = sorted(glob.glob(
         os.path.join(cfg.sketchbook_root, 'sketch_*')
     ))
-    sketches = [Sketch(sketch_dir)
-                for sketch_dir in sketch_dirs if has_config(sketch_dir)]
+    sketches = [Sketch(sketch_dir) for sketch_dir in sketch_dirs]
+    sketches = list(filter(lambda x: not x.is_draft(), sketches))
 
     env = Environment(
         loader=PackageLoader('yacho'),
