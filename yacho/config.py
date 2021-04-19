@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from dataclasses import dataclass
+from typing import List
+from dataclasses import dataclass, field
 import toml
 
 
@@ -14,6 +15,8 @@ class SketchbookConfig:
 class SketchConfig:
     title: str = ''
     draft: bool = True
+    cover: str = ''
+    images: List = field(default_factory=list)
 
 
 def load_sketchbook_config(path: str):

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import shutil
 import glob
 import logging
 from jinja2 import Environment, PackageLoader
@@ -39,11 +40,21 @@ class Sketch:
         p = os.path.join(self.path, '*.pde')
         return sorted(glob.glob(p))
 
+    def get_cover(self):
+        if len(self.cfg.cover) > 0:
+            return os.path.join(self.path, self.cfg.cover)
+        else:
+            return None
+
+    def get_images(self):
+        images = [os.path.join(self.path, image) for image in self.cfg.images]
+        return images
+
     def has_config(self):
         return os.path.exists(os.path.join(self.path, 'yacho.sketch.toml'))
 
 
-def render_sketch_page(template, sketch):
+def render_sketch_page(cfg, template, sketch):
 
     codes = []
     filenames = []
@@ -55,9 +66,19 @@ def render_sketch_page(template, sketch):
         codes.append(code)
         filenames.append(filename)
 
+    if sketch.get_cover() is not None:
+        cover_filename = os.path.split(sketch.get_cover())[1]
+    else:
+        cover_filename = None
+    image_filenames = [os.path.split(image)[1]
+                       for image in sketch.get_images()]
+
     return template.render(
+        base_url=cfg.base_url,
         page_title=sketch.title,
-        imgs=[],
+        sketch=sketch,
+        cover=cover_filename,
+        images=image_filenames,
         code_info=zip(filenames, codes)
     )
 
@@ -85,7 +106,9 @@ def build(cfg: SketchbookConfig):
 
     result_sketch_pages = []
     for sketch in sketches:
-        result_sketch_page = render_sketch_page(template_sketch_page, sketch)
+        result_sketch_page = render_sketch_page(
+            cfg, template_sketch_page, sketch
+        )
         result_sketch_pages.append(result_sketch_page)
 
     # --- Write files ---
@@ -98,10 +121,36 @@ def build(cfg: SketchbookConfig):
 
     for sketch, result_sketch_page in zip(sketches, result_sketch_pages):
 
+        # Create output directory
+
         output_dir = os.path.join('dist', sketch.name)
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
             logging.info(f'`{output_dir}` is created.')
 
+        img_dir = os.path.join('dist', sketch.name, 'imgs')
+        if not os.path.exists(img_dir):
+            os.makedirs(img_dir)
+            logging.info(f'`{img_dir}` is created.')
+
+        # Write HTMLs
+
         with open(os.path.join(output_dir, 'index.html'), 'w') as f:
             f.write(result_sketch_page)
+
+        # Copy images
+
+        cover_path = sketch.get_cover()
+        if cover_path is not None and os.path.exists(cover_path):
+            cover_name = os.path.split(cover_path)[1]
+            shutil.copy(cover_path, os.path.join(img_dir, cover_name))
+        else:
+            logging.warning(f'Cover image: `{cover_path}` is not found.')
+
+        image_paths = sketch.get_images()
+        for image_path in image_paths:
+            if os.path.exists(image_path):
+                _, img_name = os.path.split(image_path)
+                shutil.copy(cover_path, os.path.join(img_dir, img_name))
+            else:
+                logging.warning(f'Image: `{image_path}` is not found.')
