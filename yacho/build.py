@@ -22,15 +22,19 @@ class Sketch:
 def render_sketch_page(template, sketch):
 
     codes = []
+    filenames = []
     for pde in sketch.get_pdes():
         with open(pde, 'r') as f:
             code = f.read()
+        filename = os.path.split(pde)[1]
+
         codes.append(code)
+        filenames.append(filename)
 
     return template.render(
         page_title=sketch.name,
         imgs=[],
-        codes=codes
+        code_info=zip(filenames, codes)
     )
 
 
