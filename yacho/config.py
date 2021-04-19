@@ -4,15 +4,20 @@ import toml
 
 
 @dataclass
-class Config:
-    sketchbook_root: str
-    base_url: str
+class SketchbookConfig:
+    sketchbook_root: str = '.'
+    base_url: str = '/'
 
 
-def load_toml(path: str):
+@dataclass
+class SketchConfig:
+    draft: bool = True
+
+
+def load_sketchbook_config(path: str):
     with open(path, 'r') as f:
         data = toml.load(f)
-    return Config(
+    return SketchbookConfig(
         sketchbook_root=data['sketchbook_root'],
         base_url=data['base_url']
     )

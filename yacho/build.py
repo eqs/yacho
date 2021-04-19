@@ -4,7 +4,7 @@ import glob
 import logging
 from jinja2 import Environment, PackageLoader
 
-from .config import Config
+from .config import SketchbookConfig
 
 
 class Sketch:
@@ -18,6 +18,9 @@ class Sketch:
     def get_pdes(self):
         p = os.path.join(self.path, '*.pde')
         return sorted(glob.glob(p))
+
+    def has_config(self):
+        return os.path.exists(os.path.join(self.path, 'yacho.sketch.toml'))
 
 
 def render_sketch_page(template, sketch):
@@ -43,7 +46,7 @@ def has_config(dirpath: str):
     return os.path.exists(os.path.join(dirpath, 'yacho.sketch.toml'))
 
 
-def build(cfg: Config):
+def build(cfg: SketchbookConfig):
 
     sketch_dirs = sorted(glob.glob(
         os.path.join(cfg.sketchbook_root, 'sketch_*')
