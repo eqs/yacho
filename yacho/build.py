@@ -151,6 +151,6 @@ def build(cfg: SketchbookConfig):
         for image_path in image_paths:
             if os.path.exists(image_path):
                 _, img_name = os.path.split(image_path)
-                shutil.copy(cover_path, os.path.join(img_dir, img_name))
+                shutil.copy(image_path, os.path.join(img_dir, img_name))
             else:
                 logging.warning(f'Image: `{image_path}` is not found.')
