@@ -1,0 +1,8 @@
+tox
+coverage
+codecov
+pytest
+pytest-cov
+flake8
+check-manifest
+

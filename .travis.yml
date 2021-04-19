@@ -1,0 +1,33 @@
+dist: xenial  # Ubuntu 16.04
+
+env:
+    global:
+        - DISPLAY=""
+
+language: python
+
+matrix:
+    include:
+        - python: 3.6
+          env: TOXENV=py36
+        - python: 3.7
+          env: TOXENV=py37
+        - python: 3.8
+          env: TOXENV=py38
+
+cache: pip
+
+install:
+    - pip install -r requirements.txt
+    - pip install -r tests/requirements.txt
+    - pip --version ; pip list
+
+script:
+    - tox --sitepackages
+    - python setup.py install --dry-run
+
+after_success:
+    - coverage report
+
+notifications:
+    email: false
