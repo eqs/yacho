@@ -56,7 +56,7 @@ def render_sketch_page(template, sketch):
         filenames.append(filename)
 
     return template.render(
-        page_title=sketch.name,
+        page_title=sketch.title,
         imgs=[],
         code_info=zip(filenames, codes)
     )
