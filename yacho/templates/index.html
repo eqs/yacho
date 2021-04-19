@@ -4,7 +4,7 @@
 
     <ul>
         {% for sketch in sketches %}
-        <li>{{ sketch.path }}</li>
+        <li><a href="{{ base_url }}{{ sketch.name }}">{{ sketch.name }}</a></li>
         {% endfor %}
     </ul>
 </main>

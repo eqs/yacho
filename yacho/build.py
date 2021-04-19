@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import glob
+import logging
 from jinja2 import Environment, PackageLoader
 
 from .config import Config
@@ -24,7 +25,7 @@ def render_sketch_page(template, sketch):
     codes = []
     filenames = []
     for pde in sketch.get_pdes():
-        with open(pde, 'r') as f:
+        with open(pde, 'r', encoding='utf-8') as f:
             code = f.read()
         filename = os.path.split(pde)[1]
 
@@ -42,7 +43,6 @@ def build(cfg: Config):
 
     sketch_dirs = sorted(glob.glob(os.path.join(cfg.sketchbook_root, 'sketch_*')))
     sketches = [Sketch(sketch_dir) for sketch_dir in sketch_dirs]
-    sketch = sketches[0]
 
     env = Environment(
         loader=PackageLoader('yacho'),
@@ -51,12 +51,30 @@ def build(cfg: Config):
 
     template_index = env.get_template('index.html')
     template_sketch_page = env.get_template('sketch_page.html')
-    result_index = template_index.render(sketches=sketches)
+    result_index = template_index.render(
+        base_url=cfg.base_url,
+        sketches=sketches
+    )
 
-    result_sketch_page = render_sketch_page(template_sketch_page, sketch)
+    result_sketch_pages = []
+    for sketch in sketches:
+        result_sketch_page = render_sketch_page(template_sketch_page, sketch)
+        result_sketch_pages.append(result_sketch_page)
+
+    # --- Write files ---
 
     if not os.path.exists('dist'):
         os.mkdir('dist')
 
-    with open('dist/index.html', 'w') as f:
-        f.write(result_sketch_page)
+    with open(os.path.join('dist', 'index.html'), 'w') as f:
+        f.write(result_index)
+
+    for sketch, result_sketch_page in zip(sketches, result_sketch_pages):
+
+        output_dir = os.path.join('dist', sketch.name)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+            logging.info(f'`{output_dir}` is created.')
+
+        with open(os.path.join(output_dir, 'index.html'), 'w') as f:
+            f.write(result_sketch_page)
