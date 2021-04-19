@@ -39,10 +39,17 @@ def render_sketch_page(template, sketch):
     )
 
 
+def has_config(dirpath: str):
+    return os.path.exists(os.path.join(dirpath, 'yacho.sketch.toml'))
+
+
 def build(cfg: Config):
 
-    sketch_dirs = sorted(glob.glob(os.path.join(cfg.sketchbook_root, 'sketch_*')))
-    sketches = [Sketch(sketch_dir) for sketch_dir in sketch_dirs]
+    sketch_dirs = sorted(glob.glob(
+        os.path.join(cfg.sketchbook_root, 'sketch_*')
+    ))
+    sketches = [Sketch(sketch_dir)
+                for sketch_dir in sketch_dirs if has_config(sketch_dir)]
 
     env = Environment(
         loader=PackageLoader('yacho'),
