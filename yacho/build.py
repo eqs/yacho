@@ -55,10 +55,6 @@ def render_sketch_page(template, sketch):
     )
 
 
-def has_config(dirpath: str):
-    return os.path.exists(os.path.join(dirpath, 'yacho.sketch.toml'))
-
-
 def build(cfg: SketchbookConfig):
 
     sketch_dirs = sorted(glob.glob(
