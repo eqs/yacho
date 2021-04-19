@@ -25,6 +25,13 @@ class Sketch:
     def name(self):
         return os.path.split(self.path)[1]
 
+    @property
+    def title(self):
+        if len(self.cfg.title) > 0:
+            return self.cfg.title
+        else:
+            return self.name
+
     def is_draft(self):
         return self.cfg is None or self.cfg.draft
 

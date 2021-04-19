@@ -12,6 +12,7 @@ class SketchbookConfig:
 
 @dataclass
 class SketchConfig:
+    title: str = ''
     draft: bool = True
 
 
