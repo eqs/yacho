@@ -1,0 +1,8 @@
+{% include "header.html" %}
+<main>
+    <h1>{{ page_title }}</h1>
+    {% for code in codes %}
+    <pre><code class="java">{{ code }}</code></pre>
+    {% endfor %}
+</main>
+{% include "footer.html" %}

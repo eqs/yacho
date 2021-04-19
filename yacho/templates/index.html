@@ -1,0 +1,11 @@
+{% include "header.html" %}
+<main>
+    <h1>Hello, world!</h1>
+
+    <ul>
+        {% for sketch in sketches %}
+        <li>{{ sketch.path }}</li>
+        {% endfor %}
+    </ul>
+</main>
+{% include "footer.html" %}
