@@ -7,6 +7,7 @@ import toml
 class SketchbookConfig:
     sketchbook_root: str = '.'
     base_url: str = '/'
+    title: str = 'My Sketchbook'
 
 
 @dataclass

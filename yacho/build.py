@@ -72,7 +72,8 @@ def build(cfg: SketchbookConfig):
     template_sketch_page = env.get_template('sketch_page.html')
     result_index = template_index.render(
         base_url=cfg.base_url,
-        sketches=sketches
+        sketches=sketches,
+        page_title=cfg.title
     )
 
     result_sketch_pages = []
