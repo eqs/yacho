@@ -133,7 +133,10 @@ def build(cfg: SketchbookConfig):
         base_url=cfg.base_url,
         sketches=sketches,
         page_title=cfg.title,
-        author=cfg.author
+        author=cfg.author,
+        bio=cfg.bio,
+        avatar=cfg.avatar,
+        custom_css=cfg.custom_css
     )
 
     result_sketch_pages = []
@@ -186,3 +189,22 @@ def build(cfg: SketchbookConfig):
                 shutil.copy(image_path, os.path.join(img_dir, img_name))
             else:
                 logging.warning(f'Image: `{image_path}` is not found.')
+
+        # Static files
+        static_images_dir = os.path.join('dist', 'images')
+        if not os.path.exists(static_images_dir):
+            os.makedirs(static_images_dir)
+            logging.info(f'`{static_images_dir}` is created.')
+
+        if len(cfg.avatar) > 0:
+            _, img_name = os.path.split(cfg.avatar)
+            shutil.copy(cfg.avatar, os.path.join(static_images_dir, img_name))
+
+        static_css_dir = os.path.join('dist', 'css')
+        if not os.path.exists(static_css_dir):
+            os.makedirs(static_css_dir)
+            logging.info(f'`{static_css_dir}` is created.')
+
+        if len(cfg.custom_css) > 0:
+            _, css_name = os.path.split(cfg.custom_css)
+            shutil.copy(cfg.custom_css, os.path.join(static_css_dir, css_name))

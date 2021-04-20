@@ -10,6 +10,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
         <style>
             /* Top page */
+            .profile {
+                text-align: center;
+            }
+
+            .profile img {
+                width: 18vmin;
+                height: 18vmin;
+            }
+
             .card-body img {
                 margin: 5px;
             }
@@ -62,6 +71,9 @@
                 padding: 0 15px 0 5px;
             }
         </style>
+        {% if custom_css | length > 0 %}
+        <link rel="stylesheet" href="/css/{{ custom_css }}">
+        {% endif %}
         <title>{{ page_title }}</title>
     </head>
     <body>

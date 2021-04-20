@@ -10,6 +10,9 @@ class SketchbookConfig:
     base_url: str = '/'
     title: str = 'My Sketchbook'
     author: str = ''
+    avatar: str = ''
+    bio: str = ''
+    custom_css: str = ''
 
 
 @dataclass
