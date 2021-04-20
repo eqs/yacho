@@ -6,6 +6,9 @@ from setuptools import find_packages
 from setuptools import setup
 
 
+ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+
 def read(filename):
     filename = os.path.join(os.path.dirname(__file__), filename)
     text_type = type(u"")
@@ -33,7 +36,9 @@ setup(
 
     packages=find_packages(exclude=('tests',)),
 
-    install_requires=_requires_from_file('requirements.txt'),
+    install_requires=_requires_from_file(
+        os.path.join(ROOT_DIR, 'requirements.txt')
+    ),
 
     entry_points={'console_scripts': ['yacho = yacho.__main__:main']},
     include_package_data=True,
