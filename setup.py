@@ -6,9 +6,6 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
-
-
 def read(filename):
     filename = os.path.join(os.path.dirname(__file__), filename)
     text_type = type(u"")
@@ -16,10 +13,6 @@ def read(filename):
         return re.sub(text_type(r':[a-z]+:`~?(.*?)`'),
                       text_type(r'``\1``'),
                       fd.read())
-
-
-def _requires_from_file(filename):
-    return open(filename).read().splitlines()
 
 
 setup(
@@ -36,9 +29,7 @@ setup(
 
     packages=find_packages(exclude=('tests',)),
 
-    install_requires=_requires_from_file(
-        os.path.join(ROOT_DIR, 'requirements.txt')
-    ),
+    install_requires=['click', 'toml', 'jinja2']
 
     entry_points={'console_scripts': ['yacho = yacho.__main__:main']},
     include_package_data=True,
