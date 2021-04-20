@@ -2,10 +2,19 @@
 <main>
     <h1>{{ page_title }}</h1>
 
-    <ul>
-        {% for sketch in sketches %}
-        <li><a href="{{ base_url }}{{ sketch.name }}">{{ sketch.title }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container-fluid pt-3">
+        <div class="card-columns">
+            {% for sketch in sketches %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ sketch.title }}</h5>
+                    <img class="card-img-top rounded mx-auto d-block"
+                         src="{{ sketch.cover_url }}">
+                    <a href="{{ sketch.url }}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </main>
 {% include "footer.html" %}

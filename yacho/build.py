@@ -11,9 +11,10 @@ from .config import (
 
 
 class Sketch:
-    def __init__(self, path: str):
+    def __init__(self, path: str, sketchbook_cfg: SketchbookConfig):
 
         self.path = path
+        self.sketchbook_cfg = sketchbook_cfg
 
         if self.has_config():
             self.cfg = load_sketch_config(
@@ -32,6 +33,18 @@ class Sketch:
             return self.cfg.title
         else:
             return self.name
+
+    @property
+    def cover_name(self):
+        return os.path.split(self.cfg.cover)[1]
+
+    @property
+    def url(self):
+        return self.sketchbook_cfg.base_url + self.name
+
+    @property
+    def cover_url(self):
+        return self.url + '/imgs/' + self.cover_name
 
     def is_draft(self):
         return self.cfg is None or self.cfg.draft
@@ -88,7 +101,7 @@ def build(cfg: SketchbookConfig):
     sketch_dirs = sorted(glob.glob(
         os.path.join(cfg.sketchbook_root, 'sketch_*')
     ))
-    sketches = [Sketch(sketch_dir) for sketch_dir in sketch_dirs]
+    sketches = [Sketch(sketch_dir, cfg) for sketch_dir in sketch_dirs]
     sketches = list(filter(lambda x: not x.is_draft(), sketches))
 
     env = Environment(
