@@ -15,10 +15,6 @@ def read(filename):
                       fd.read())
 
 
-def _requires_from_file(filename):
-    return open(filename).read().splitlines()
-
-
 setup(
     name="yacho",
     version="0.0.0",
@@ -33,7 +29,7 @@ setup(
 
     packages=find_packages(exclude=('tests',)),
 
-    install_requires=_requires_from_file('requirements.txt'),
+    install_requires=['click', 'toml', 'jinja2'],
 
     entry_points={'console_scripts': ['yacho = yacho.__main__:main']},
     include_package_data=True,
