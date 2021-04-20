@@ -23,6 +23,24 @@ class Sketch:
         else:
             self.cfg = None
 
+        # 設定ファイルに画像の記載が無い
+        # & カバー画像，画像リストのフォルダが存在するならフォルダからの
+        # デプロイにする
+        if (os.path.exists(os.path.join(self.path, 'cover'))
+            and os.path.exists(os.path.join(self.path, 'images'))
+            and (len(self.cfg.cover) == 0 and len(self.cfg.images) == 0)):
+
+            cover = glob.glob(
+                os.path.join(self.path, 'cover', '*')
+            )[0]
+            self.cfg.cover = os.path.join('cover', os.path.split(cover)[1])
+
+            images = glob.glob(
+                os.path.join(self.path, 'images', '*')
+            )
+            self.cfg.images = [os.path.join('images', os.path.split(image)[1])
+                               for image in images]
+
     @property
     def name(self):
         return os.path.split(self.path)[1]
