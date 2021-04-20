@@ -27,8 +27,8 @@ class Sketch:
         # & カバー画像，画像リストのフォルダが存在するならフォルダからの
         # デプロイにする
         if (os.path.exists(os.path.join(self.path, 'cover'))
-            and os.path.exists(os.path.join(self.path, 'images'))
-            and (len(self.cfg.cover) == 0 and len(self.cfg.images) == 0)):
+                and os.path.exists(os.path.join(self.path, 'images'))
+                and (len(self.cfg.cover) == 0 and len(self.cfg.images) == 0)):
 
             cover = glob.glob(
                 os.path.join(self.path, 'cover', '*')
