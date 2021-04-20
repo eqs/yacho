@@ -2,6 +2,14 @@
 <main>
     <h1>{{ page_title }}</h1>
 
+    {% if avatar | length > 0 %}
+        <img src="/images/{{ avatar }}">
+    {% endif %}
+    <p>{{ author }}</p>
+    {% if bio | length > 0 %}
+        <p>{{ bio }}</p>
+    {% endif %}
+
     <div class="container-fluid pt-3">
         <div class="card-columns">
             {% for sketch in sketches %}
