@@ -1,7 +1,10 @@
 {% include "header.html" %}
 <main>
-    <h1>{{ page_title }}</h1>
-    <img class="cover" src="{{ base_url }}{{ sketch.name }}/imgs/{{ cover }}">
+    <h1 class="entry-title">{{ page_title }}</h1>
+    <div class="cover">
+        <img class="img-fluid rounded mx-auto d-block"
+             src="{{ base_url }}{{ sketch.name }}/imgs/{{ cover }}">
+    </div>
     <div class="container-fluid pt-3">
         <div class="card-columns">
             {% for image in images %}
