@@ -1,0 +1,13 @@
+{% include "header.html" %}
+<main>
+    <h1>{{ page_title }}</h1>
+    <img class="cover" src="{{ base_url }}{{ sketch.name }}/imgs/{{ cover }}">
+    {% for image in images %}
+    <img class="image" src="{{ base_url }}{{ sketch.name }}/imgs/{{ image }}">
+    {% endfor %}
+    {% for filename, code in code_info %}
+    <h2>{{ filename }}</h2>
+    <pre><code class="java">{{ code }}</code></pre>
+    {% endfor %}
+</main>
+{% include "footer.html" %}

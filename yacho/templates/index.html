@@ -1,0 +1,11 @@
+{% include "header.html" %}
+<main>
+    <h1>{{ page_title }}</h1>
+
+    <ul>
+        {% for sketch in sketches %}
+        <li><a href="{{ base_url }}{{ sketch.name }}">{{ sketch.title }}</a></li>
+        {% endfor %}
+    </ul>
+</main>
+{% include "footer.html" %}
