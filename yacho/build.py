@@ -132,7 +132,8 @@ def build(cfg: SketchbookConfig):
     result_index = template_index.render(
         base_url=cfg.base_url,
         sketches=sketches,
-        page_title=cfg.title
+        page_title=cfg.title,
+        author=cfg.author
     )
 
     result_sketch_pages = []
