@@ -105,12 +105,15 @@ def render_sketch_page(cfg, template, sketch):
                        for image in sketch.get_images()]
 
     return template.render(
+        cfg=cfg,
         base_url=cfg.base_url,
+        site_title=cfg.title,
         page_title=sketch.title,
         sketch=sketch,
         cover=cover_filename,
         images=image_filenames,
-        code_info=zip(filenames, codes)
+        code_info=zip(filenames, codes),
+        custom_css=os.path.split(cfg.custom_css)[1]
     )
 
 
@@ -130,13 +133,15 @@ def build(cfg: SketchbookConfig):
     template_index = env.get_template('index.html')
     template_sketch_page = env.get_template('sketch_page.html')
     result_index = template_index.render(
+        cfg=cfg,
         base_url=cfg.base_url,
         sketches=sketches,
+        site_title=cfg.title,
         page_title=cfg.title,
         author=cfg.author,
         bio=cfg.bio,
         avatar=cfg.avatar,
-        custom_css=cfg.custom_css
+        custom_css=os.path.split(cfg.custom_css)[1]
     )
 
     result_sketch_pages = []

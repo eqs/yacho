@@ -10,6 +10,19 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
         <style>
             /* Top page */
+            html body {
+                font-family: 'Fira Sans', sans-serif;
+                font-weight: 300;
+                background: rgb(232, 232, 232);
+            }
+
+            main {
+                max-width: 980px;
+                margin: auto;
+                padding: 25px;
+                flex: 1 0 auto;
+            }
+
             .profile {
                 text-align: center;
             }
@@ -17,6 +30,7 @@
             .profile img {
                 width: 18vmin;
                 height: 18vmin;
+                margin: 8px;
             }
 
             .card-body img {
@@ -29,7 +43,7 @@
 
             footer {
                 text-align: center;
-                margin: 15px 0;
+                margin: 0 0 0 15px;
             }
 
             /* Sketch page */
@@ -77,3 +91,7 @@
         <title>{{ page_title }}</title>
     </head>
     <body>
+
+        <nav class="navbar nabvar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">{{ site_title }}</a>
+        </nav>

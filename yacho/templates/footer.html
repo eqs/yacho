@@ -1,6 +1,6 @@
         <footer>
-            {% if author | length > 1 %}
-                <p>&copy; {{ author }}. All Rights Reserved.</p>
+            {% if cfg is defined %}
+                <p>&copy; {{ cfg.author }}. All Rights Reserved.</p>
             {% endif %}
         </footer>
 
