@@ -135,7 +135,8 @@ def build(cfg: SketchbookConfig):
         page_title=cfg.title,
         author=cfg.author,
         bio=cfg.bio,
-        avatar=cfg.avatar
+        avatar=cfg.avatar,
+        custom_css=cfg.custom_css
     )
 
     result_sketch_pages = []

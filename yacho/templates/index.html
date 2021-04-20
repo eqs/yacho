@@ -2,13 +2,15 @@
 <main>
     <h1>{{ page_title }}</h1>
 
-    {% if avatar | length > 0 %}
-        <img src="/images/{{ avatar }}">
-    {% endif %}
-    <p>{{ author }}</p>
-    {% if bio | length > 0 %}
-        <p>{{ bio }}</p>
-    {% endif %}
+    <div class="profile">
+        {% if avatar | length > 0 %}
+            <img class="rounded-circle" src="/images/{{ avatar }}">
+        {% endif %}
+        <h5>{{ author }}</h5>
+        {% if bio | length > 0 %}
+            <p>{{ bio }}</p>
+        {% endif %}
+    </div>
 
     <div class="container-fluid pt-3">
         <div class="card-columns">
