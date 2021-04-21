@@ -141,6 +141,42 @@
             table.hljs-ln td {
                 padding: 0 15px 0 5px;
             }
+
+            /* share button */
+            .social-btns .fbtn {
+                width: 50px;
+                display: inline-block;
+                color: var(--social-link);
+                text-align: center;
+                line-height: 18px;
+            }
+            .social-btns .fa {
+                padding: 15px 0px
+            }
+            .share-button.sharer {
+                padding: 10px 20px 20px 20px;
+            }
+            .share-button.sharer .share-btn:focus{
+                box-shadow: none;
+                outline: none !important;
+            }
+            .share-button.sharer .social-btns.active.top {
+                transform: scale(1) translateY(12px);
+            }
+            .share-button.sharer .social-btns.active {
+                opacity: 1;
+                transition: all 0.4s ease 0s;
+                visibility: visible;
+            }
+            .share-button.sharer .social-btns.social-networks {} .share-button.sharer .social.top {
+                margin-top: -80px;
+                transform-origin: 0 0 0;
+            }
+            .share-button.sharer .social-btns {
+                opacity: 0;
+                transition: all 0.4s ease 0s;
+                visibility: hidden;
+            }
         </style>
         {% if custom_css | length > 0 %}
         <link rel="stylesheet" href="/css/{{ custom_css }}">

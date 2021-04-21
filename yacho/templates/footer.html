@@ -14,5 +14,17 @@
         <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
         <script>hljs.initLineNumbersOnLoad();</script>
+
+        <script>
+$( document ).ready(function() {
+     //custom button for homepage
+     $( ".share-btn" ).click(function(e) {
+          $('.social-networks').not($(this).next( ".social-networks" )).each(function(){
+             $(this).removeClass("active");
+         });
+         $(this).next( ".social-networks" ).toggleClass( "active" );
+    });
+});
+        </script>
     </body>
 </html>
