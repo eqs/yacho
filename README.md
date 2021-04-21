@@ -63,6 +63,8 @@ pip install git+https://github.com/eqs/yacho.git@v0.0.1
 yacho yacho.sketchbook.toml
 ```
 
+Push `dist` to your gh-pages.
+
 ### Example `yacho.sketchbook.toml`
 
 ```toml
