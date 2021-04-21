@@ -5,6 +5,11 @@ import toml
 
 
 @dataclass
+class SocialConfig:
+    twitter: str = ''
+
+
+@dataclass
 class SketchbookConfig:
     sketchbook_root: str = '.'
     base_url: str = '/'
@@ -13,6 +18,8 @@ class SketchbookConfig:
     avatar: str = ''
     bio: str = ''
     custom_css: str = ''
+
+    social: SocialConfig = field(default_factory=lambda: SocialConfig())
 
 
 @dataclass
