@@ -72,6 +72,9 @@ sketchbook_root = '.'
 
 base_url = 'https://yacho-demo.netlify.app/'
 
+# Page title
+title = 'My Sketchbook'
+
 # Profile information
 author = 'eqs'
 avatar = 'chi.png' # relative path from sketchbook_root
