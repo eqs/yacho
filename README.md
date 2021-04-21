@@ -5,6 +5,11 @@ yacho
 [![Latest PyPI version](https://img.shields.io/pypi/v/yacho.svg)](https://pypi.python.org/pypi/yacho)
 [![Latest Travis CI build status](https://travis-ci.com/eqs/yacho.png)](https://travis-ci.com/eqs/yacho)
 
+## Demo page
+
+* Demo page: https://yacho-demo.netlify.app/
+* Repository: https://github.com/eqs/yacho-example
+
 ## Requirements
 
 * Python 3.7+
@@ -19,16 +24,44 @@ pip install git+https://github.com/eqs/yacho.git@v0.0.1
 
 ### Directory Structure
 
+```
+.
+│  avatar.png
+│  custom.css
+│  yacho.sketchbook.toml
+│
+├─sketch_210401a
+│  │  sketch_210401a.pde
+│  │  yacho.sketch.toml
+│  │
+│  ├─cover
+│  │      cover_image.png
+│  │
+│  └─images
+│          img1.png
+│          img2.png
+│          img3.png
+│          ...
+│
+└─sketch_210402a
+    │  sketch_210402a.pde
+    │  yacho.sketch.toml
+    │
+    ├─cover
+    │      cover_image.png
+    │
+    └─images
+            img1.png
+            img2.png
+            img3.png
+            ...
+```
+
 ### Build site
 
 ```
 yacho yacho.sketchbook.toml
 ```
-
-## Example
-
-* Demo page: https://yacho-demo.netlify.app/
-* Repository: https://github.com/eqs/yacho-example
 
 ### Example `yacho.sketchbook.toml`
 
