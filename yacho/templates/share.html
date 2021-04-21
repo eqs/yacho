@@ -5,12 +5,9 @@
     </button>
     <div class="social-btns top center social-networks">
         <!-- Twitter Share Button -->
-        <a class="fbtn" href="https://twitter.com/intent/tweet?text=title&amp;url=url&amp;via=creativedevs"><i class="fab fa-twitter"></i></a>
+        <a class="fbtn" href="https://twitter.com/intent/tweet?text={{ sketch.title }} {{ cfg.base_url }}{{ sketch.name }}"><i class="fab fa-twitter"></i></a>
 
         <!-- Facebook Share Button -->
-        <a class="fbtn" href="https://www.facebook.com/sharer/sharer.php?u=url"><i class="fab fa-facebook"></i></a>
-
-        <!-- Pinterest Share Button -->
-        <a class="fbtn" href="http://pinterest.com/pin/create/button/?url=url&amp;description=data&amp;media=image"><i class="fab fa-pinterest"></i></a>
+        <a class="fbtn" href="https://www.facebook.com/sharer/sharer.php?u={{ cfg.base_url }}{{ sketch.name }}"><i class="fab fa-facebook"></i></a>
     </div>
 </div>
