@@ -12,13 +12,16 @@
         {% endif %}
         <meta property="og:url" content="{{ cfg.base_url }}" />
         <meta property="og:type" content="website" />
-        {% if page_title | length > 1 %}
+        {% if page_title | length > 0 %}
             <meta property="og:title" content="{{ page_title }}" />
             <meta name="twitter:title" content="{{ page_title }}" />
         {% endif %}
-        {% if bio | length > 1 %}
+        {% if bio is defined %}
             <meta property="og:description" content="{{ bio }}" />
             <meta name="twitter:description" content="{{ bio }}">
+        {% elif comment is defined %}
+            <meta property="og:description" content="{{ comment }}" />
+            <meta name="twitter:description" content="{{ comment }}">
         {% endif %}
         {% if avatar is defined %}
         <meta property="og:image" content="{{ cfg.base_url }}images/{{ avatar }}" />

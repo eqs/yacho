@@ -28,6 +28,7 @@ class SketchConfig:
     draft: bool = True
     cover: str = ''
     images: List = field(default_factory=list)
+    comment: str = ''
 
 
 def load_sketchbook_config(path: str):
