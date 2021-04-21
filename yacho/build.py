@@ -110,6 +110,7 @@ def render_sketch_page(cfg, template, sketch):
         site_title=cfg.title,
         page_title=sketch.title,
         sketch=sketch,
+        comment=sketch.cfg.comment,
         cover=cover_filename,
         images=image_filenames,
         code_info=zip(filenames, codes),
