@@ -36,7 +36,16 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
+
+        <!-- Fontawesome CSS -->
+        <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
         <style>
+
+            :root {
+                --social-link: #555;
+                --social-link-hover: #111;
+            }
+
             /* Top page */
             html body {
                 font-family: 'Fira Sans', sans-serif;
@@ -59,6 +68,22 @@
                 width: 18vmin;
                 height: 18vmin;
                 margin: 8px;
+            }
+
+            .profile .social {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .profile .social a {
+                color: var(--social-link);
+                line-height: 0;
+                margin: 0 8px 0;
+                transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+                text-align: center;
+            }
+            .profile .social a:hover {
+                color: var(--social-link-hover);
             }
 
             .card-body img {

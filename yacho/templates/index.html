@@ -8,6 +8,38 @@
         {% if bio | length > 0 %}
             <p>{{ bio }}</p>
         {% endif %}
+        <div class="social">
+            {% if cfg.social.home | length > 0 %}
+            <a href="{{ cfg.social.home }}">
+                    <i class="fas fa-home fa-lg"></i>
+                </a>
+            {% endif %}
+            {% if cfg.social.twitter | length > 0 %}
+                <a href="https://twitter.com/{{ cfg.social.twitter }}">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </a>
+            {% endif %}
+            {% if cfg.social.github | length > 0 %}
+                <a href="https://github.com/{{ cfg.social.github }}">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+            {% endif %}
+            {% if cfg.social.instagram | length > 0 %}
+                <a href="https://www.instagram.com/{{ cfg.social.instagram }}">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            {% endif %}
+            {% if cfg.social.youtube | length > 0 %}
+                <a href="https://www.youtube.com/{{ cfg.social.youtube }}">
+                    <i class="fab fa-youtube fa-lg"></i>
+                </a>
+            {% endif %}
+            {% if cfg.social.facebook | length > 0 %}
+                <a href="https://www.facebook.com/{{ cfg.social.facebook }}">
+                    <i class="fab fa-facebook-square fa-lg"></i>
+                </a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="container-fluid pt-3">

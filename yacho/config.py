@@ -6,7 +6,12 @@ import toml
 
 @dataclass
 class SocialConfig:
+    home: str = ''
     twitter: str = ''
+    github: str = ''
+    instagram: str = ''
+    youtube: str = ''
+    facebook: str = ''
 
 
 @dataclass
@@ -34,6 +39,10 @@ class SketchConfig:
 def load_sketchbook_config(path: str):
     with open(path, 'r') as f:
         data = toml.load(f)
+
+    if 'social' in data:
+        data.update({'social': SocialConfig(**data['social'])})
+
     return SketchbookConfig(**data)
 
 
