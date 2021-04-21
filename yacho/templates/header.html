@@ -5,6 +5,31 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <!-- ogp -->
+        <meta name="twitter:card" content="summary_large_image" />
+        {% if cfg.social.twitter | length > 0 %}
+        <meta name="twitter:creator" content="{{ cfg.social.twitter }}" />
+        {% endif %}
+        <meta property="og:url" content="{{ cfg.base_url }}" />
+        <meta property="og:type" content="website" />
+        {% if page_title | length > 1 %}
+            <meta property="og:title" content="{{ page_title }}" />
+            <meta name="twitter:title" content="{{ page_title }}" />
+        {% endif %}
+        {% if bio | length > 1 %}
+            <meta property="og:description" content="{{ bio }}" />
+            <meta name="twitter:description" content="{{ bio }}">
+        {% endif %}
+        {% if avatar is defined %}
+        <meta property="og:image" content="{{ cfg.base_url }}images/{{ avatar }}" />
+        <meta name="twitter:image" content="{{ cfg.base_url }}images/{{ avatar }}" />
+        {% elif sketch is defined %}
+            {% if sketch.cover_name | length > 0 %}
+            <meta property="og:image" content="{{ cfg.base_url }}imgs/{{ sketch.cover_name }}" />
+            <meta name="twitter:image" content="{{ cfg.base_url }}imgs/{{ sketch.cover_name }}" />
+            {% endif %}
+        {% endif %}
+
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai.min.css">
