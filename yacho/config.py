@@ -6,7 +6,12 @@ import toml
 
 @dataclass
 class SocialConfig:
+    home: str = ''
     twitter: str = ''
+    github: str = ''
+    instagram: str = ''
+    youtube: str = ''
+    facebook: str = ''
 
 
 @dataclass
