@@ -3,14 +3,14 @@
     <h1 class="entry-title">{{ page_title }}</h1>
     <div class="cover">
         <img class="img-fluid rounded mx-auto d-block"
-             src="{{ sketch.cover_url }}">
+             src="imgs/{{ sketch.cover_name }}">
     </div>
     <div class="container-fluid pt-3">
         <div class="card-columns">
             {% for image in images %}
             <div class="card">
                 <img class="image-grid card-img-top rounded mx-auto d-block"
-                     src="{{ sketch.url }}/imgs/{{ image }}">
+                     src="imgs/{{ image }}">
             </div>
             {% endfor %}
         </div>

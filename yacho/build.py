@@ -58,7 +58,7 @@ class Sketch:
 
     @property
     def url(self):
-        return self.sketchbook_cfg.base_url + self.name
+        return self.name
 
     @property
     def cover_url(self):
