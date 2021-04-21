@@ -25,8 +25,8 @@
         <meta name="twitter:image" content="{{ cfg.base_url }}images/{{ avatar }}" />
         {% elif sketch is defined %}
             {% if sketch.cover_name | length > 0 %}
-            <meta property="og:image" content="{{ cfg.base_url }}imgs/{{ sketch.cover_name }}" />
-            <meta name="twitter:image" content="{{ cfg.base_url }}imgs/{{ sketch.cover_name }}" />
+            <meta property="og:image" content="{{ cfg.base_url }}{{ sketch.url }}/imgs/{{ sketch.cover_name }}" />
+            <meta name="twitter:image" content="{{ cfg.base_url }}{{ sketch.url }}/imgs/{{ sketch.cover_name }}" />
             {% endif %}
         {% endif %}
 
