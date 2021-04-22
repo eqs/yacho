@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 import click
 from .config import load_sketchbook_config
 from .build import build_site
@@ -15,9 +16,11 @@ def create():
 
 
 @cli.command()
-@click.option('-i', default='yacho.sketchbook.toml')
-def build(i):
-    cfg = load_sketchbook_config(i)
+@click.option('-d', default='.', help='path to sketchbook dir')
+def build(d):
+    assert os.path.isdir(d)
+    path = os.path.join(d, 'yacho.sketchbook.toml')
+    cfg = load_sketchbook_config(path)
     build_site(cfg)
 
 
