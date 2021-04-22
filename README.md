@@ -104,4 +104,11 @@ title = "Flowers"
 draft = false
 
 comment = "An example comment."
+
+[video]
+# Please set 'none', 'youtube', 'vimeo', 'neort' or 'gif'
+type = 'none'
+
+# If you use 'gif', id will be interpreted as file path of gif animation.
+id = ''
 ```
