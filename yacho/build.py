@@ -123,7 +123,7 @@ def render_sketch_page(cfg, template, sketch):
     )
 
 
-def build(cfg: SketchbookConfig):
+def build_site(cfg: SketchbookConfig):
 
     sketch_dirs = sorted(glob.glob(
         os.path.join(cfg.sketchbook_root, 'sketch_*')
