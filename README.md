@@ -105,6 +105,7 @@ draft = false
 
 comment = "An example comment."
 
+# video embedding will be available v0.0.2
 [video]
 # Please set 'none', 'youtube', 'vimeo', 'neort' or 'gif'
 type = 'none'
