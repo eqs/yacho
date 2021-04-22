@@ -214,7 +214,6 @@ def build(cfg: SketchbookConfig):
             _, gif_name = os.path.split(gif_path)
             shutil.copy(gif_path, os.path.join(gif_dir, gif_name))
 
-
         # Static files
         static_images_dir = os.path.join('dist', 'images')
         if not os.path.exists(static_images_dir):
