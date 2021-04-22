@@ -36,8 +36,8 @@ def generate_p5js():
         'yacho',
         encoding='utf8'
     ))
-    tpl_index = env.get_template('index.html')
-    tpl_js = env.get_template('sketch.js')
+    tpl_index = env.get_template('sketch/p5js/index.html')
+    tpl_js = env.get_template('sketch/p5js/sketch.js')
 
     now = datetime.datetime.now()
     date = now.strftime('%y%m%d')
@@ -53,7 +53,7 @@ def generate_p5js():
     with open(os.path.join(param['id'], 'index.html'), 'wb') as f:
         f.write(output_html)
 
-    with open(os.path.join(param['id'], f'{param["id"]}.js'), 'wb') as f:
+    with open(os.path.join(param['id'], 'sketch.js'), 'wb') as f:
         f.write(output_js)
 
 
@@ -77,4 +77,9 @@ def generate_pde():
 
 
 def generate_sketch(type='pde'):
-    generate_pde()
+    if type == 'pde':
+        generate_pde()
+    elif type == 'p5js':
+        generate_p5js()
+    else:
+        raise RuntimeError(f'Unknown sketch type: {type}')

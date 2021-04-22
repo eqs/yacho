@@ -12,8 +12,9 @@ def cli():
 
 
 @cli.command()
-def create():
-    generate_sketch()
+@click.option('-t', default='pde', help='sketch type ["pde", "p5js"]')
+def create(t):
+    generate_sketch(t)
 
 
 @cli.command()
