@@ -6,7 +6,7 @@ import logging
 from jinja2 import Environment, PackageLoader
 
 from .config import (
-    load_sketch_config, SketchbookConfig
+    load_sketch_config, SketchbookConfig, VideoType
 )
 
 
@@ -104,6 +104,10 @@ def render_sketch_page(cfg, template, sketch):
     image_filenames = [os.path.split(image)[1]
                        for image in sketch.get_images()]
 
+    video_type = sketch.cfg.video.type
+    video_id = sketch.cfg.video.id
+    video_embed_code = VideoType.get_embed_code(video_type, video_id)
+
     return template.render(
         cfg=cfg,
         base_url=cfg.base_url,
@@ -111,6 +115,7 @@ def render_sketch_page(cfg, template, sketch):
         page_title=sketch.title,
         sketch=sketch,
         comment=sketch.cfg.comment,
+        video_embed_code=video_embed_code,
         cover=cover_filename,
         images=image_filenames,
         code_info=zip(filenames, codes),
@@ -195,6 +200,19 @@ def build(cfg: SketchbookConfig):
                 shutil.copy(image_path, os.path.join(img_dir, img_name))
             else:
                 logging.warning(f'Image: `{image_path}` is not found.')
+
+        # Copy gif
+        if sketch.cfg.video.type == VideoType.gif:
+            # 出力先のディレクトリが無いなら作る
+            gif_dir = os.path.join('dist', sketch.name, 'gifs')
+            if not os.path.exists(gif_dir):
+                os.makedirs(gif_dir)
+                logging.info(f'`{gif_dir}` is created.')
+
+            # GIF画像のときはIDがファイルパス
+            gif_path = os.path.join(sketch.name, sketch.cfg.video.id)
+            _, gif_name = os.path.split(gif_path)
+            shutil.copy(gif_path, os.path.join(gif_dir, gif_name))
 
         # Static files
         static_images_dir = os.path.join('dist', 'images')
