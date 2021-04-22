@@ -29,6 +29,7 @@ class VideoType(Enum):
             return ''
         elif video_type.name == 'youtube':
             return f'''<div class="youtube-embed"><iframe \
+width="560" height="315" \
 src="https://www.youtube.com/embed/{id_}" \
 title="YouTube video player" frameborder="0" \
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; \
