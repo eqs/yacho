@@ -3,6 +3,7 @@ import os
 import click
 from .config import load_sketchbook_config
 from .build import build_site
+from .sketch_generator import generate_sketch
 
 
 @click.group()
@@ -12,7 +13,7 @@ def cli():
 
 @cli.command()
 def create():
-    pass
+    generate_sketch()
 
 
 @cli.command()

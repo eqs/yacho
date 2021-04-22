@@ -21,7 +21,7 @@ def make_project_dir(path: str):
     config_path = os.path.join(path, 'yacho.sketch.toml')
     if not os.path.exists(config_path):
         with open(os.path.join(config_path), 'w') as f:
-            f.write('draft = false')
+            f.write('draft = true')
 
 
 def generate_id(c):
@@ -33,7 +33,7 @@ def generate_id(c):
 
 def generate_p5js():
     env = Environment(loader=PackageLoader(
-        'template/sketch/p5js',
+        'yacho',
         encoding='utf8'
     ))
     tpl_index = env.get_template('index.html')
@@ -58,8 +58,8 @@ def generate_p5js():
 
 
 def generate_pde():
-    env = Environment(loader=PackageLoader('template/sketch/pde', encoding='utf8'))
-    tpl = env.get_template('template.pde')
+    env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
+    tpl = env.get_template('sketch/pde/template.pde')
 
     now = datetime.datetime.now()
     date = now.strftime('%y%m%d')
