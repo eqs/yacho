@@ -6,7 +6,7 @@ import logging
 from jinja2 import Environment, PackageLoader
 
 from .config import (
-    load_sketch_config, SketchbookConfig
+    load_sketch_config, SketchbookConfig, VideoType
 )
 
 
@@ -104,6 +104,10 @@ def render_sketch_page(cfg, template, sketch):
     image_filenames = [os.path.split(image)[1]
                        for image in sketch.get_images()]
 
+    video_type = sketch.cfg.video.type
+    video_id = sketch.cfg.video.id
+    video_embed_code = VideoType.get_embed_code(video_type, video_id)
+
     return template.render(
         cfg=cfg,
         base_url=cfg.base_url,
@@ -111,6 +115,7 @@ def render_sketch_page(cfg, template, sketch):
         page_title=sketch.title,
         sketch=sketch,
         comment=sketch.cfg.comment,
+        video_embed_code=video_embed_code,
         cover=cover_filename,
         images=image_filenames,
         code_info=zip(filenames, codes),
