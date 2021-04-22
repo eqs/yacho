@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from typing import List
 from dataclasses import dataclass, field
+from enum import Enum
 import toml
 
 
@@ -12,6 +13,51 @@ class SocialConfig:
     instagram: str = ''
     youtube: str = ''
     facebook: str = ''
+
+
+class VideoType(Enum):
+    none = 0
+    youtube = 1
+    vimeo = 2
+    neort = 3
+    gif = 4
+
+    def get_embed_code(self, id_: str):
+        if self.name == 'none':
+            raise RuntimeError()
+        elif self.name == 'youtube':
+            return f'''<div class="youtube-embed"><iframe \
+src="https://www.youtube.com/embed/{id_}" \
+title="YouTube video player" frameborder="0" \
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; \
+gyroscope; picture-in-picture" allowfullscreen></iframe></div>'''
+
+        elif self.name == 'vimeo':
+            return f'''<div class="vimeo-embed">\
+<iframe src="https://player.vimeo.com/video/{id_}?loop=1" \
+style="position:absolute;top:0;left:0;width:100%;height:100%;" \
+frameborder="0" allow="autoplay; fullscreen; picture-in-picture" \
+allowfullscreen></iframe>\
+</div>'''
+        elif self.name == 'neort':
+            return f'''<div class="neort-embed">
+<iframe src="https://neort.io/embed/{id_}?autoStart=true&\
+quality=1&info=true" \
+frameborder="0" sandbox="allow-forms allow-modals allow-pointer-lock \
+allow-popups allow-same-origin allow-scripts" \
+allow="geolocation; microphone; camera; midi; vr" \
+allowfullscreen="true" allowtransparency="true"></iframe>\
+</div>'''
+        elif self.name == 'gif':
+            return f'<div class="gif-embed"><img src="gifs/{id_}"></div>'
+        else:
+            raise RuntimeError()
+
+
+@dataclass
+class VideoConfig:
+    type: VideoType = field(default_factory=lambda: VideoType.none)
+    id: str = ''
 
 
 @dataclass
