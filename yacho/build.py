@@ -201,6 +201,20 @@ def build(cfg: SketchbookConfig):
             else:
                 logging.warning(f'Image: `{image_path}` is not found.')
 
+        # Copy gif
+        if sketch.cfg.video.type == VideoType.gif:
+            # 出力先のディレクトリが無いなら作る
+            gif_dir = os.path.join('dist', sketch.name, 'gifs')
+            if not os.path.exists(gif_dir):
+                os.makedirs(gif_dir)
+                logging.info(f'`{gif_dir}` is created.')
+
+            # GIF画像のときはIDがファイルパス
+            gif_path = os.path.join(sketch.name, sketch.cfg.video.id)
+            _, gif_name = os.path.split(gif_path)
+            shutil.copy(gif_path, os.path.join(gif_dir, gif_name))
+
+
         # Static files
         static_images_dir = os.path.join('dist', 'images')
         if not os.path.exists(static_images_dir):

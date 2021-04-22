@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 from typing import List
 from dataclasses import dataclass, field
 from enum import Enum
@@ -50,7 +51,8 @@ allow="geolocation; microphone; camera; midi; vr" \
 allowfullscreen="true" allowtransparency="true"></iframe>\
 </div>'''
         elif video_type.name == 'gif':
-            return f'<div class="gif-embed"><img src="gifs/{id_}"></div>'
+            filename = os.path.split(id_)[1]
+            return f'<div class="gif-embed"><img src="gifs/{filename}"></div>'
         else:
             raise RuntimeError()
 
