@@ -87,7 +87,7 @@ class CodeInfo:
             return 'html'
         elif self.ext in ['.c', '.cpp', '.h', '.hpp']:
             return 'cpp'
-        elif self.ext in ['.glsl']:
+        elif self.ext in ['.glsl', '.frag']:
             return 'glsl'
         elif self.ext in ['.py']:
             return 'python'
