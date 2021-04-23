@@ -48,6 +48,10 @@ def get_sketch_name(working_dir: str):
                             'How about going for a walk instead?')
 
 
+def generate_pyof():
+    pass
+
+
 def generate_p5js():
     env = Environment(loader=PackageLoader(
         'yacho',
@@ -89,5 +93,7 @@ def generate_sketch(type='pde'):
         generate_pde()
     elif type == 'p5js':
         generate_p5js()
+    elif type == 'pyof':
+        generate_pyof()
     else:
         raise RuntimeError(f'Unknown sketch type: {type}')
