@@ -45,7 +45,7 @@ def generate_p5js():
 
     param = {'id' : 'sketch_' + date + generate_id(len(today_sketch_list))}
     output_html = tpl_index.render(param).encode('utf-8')
-    output_js = tpl_js.render({}).encode('utf-8')
+    output_js = tpl_js.render(param).encode('utf-8')
 
     # Write files
     make_project_dir(param['id'])
