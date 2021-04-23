@@ -2,11 +2,12 @@
 import os
 import shutil
 import glob
+import functools
 import logging
 from jinja2 import Environment, PackageLoader
 
 from .config import (
-    load_sketch_config, SketchbookConfig, VideoType
+    load_sketch_config, SketchbookConfig, VideoType, CodeInfo
 )
 
 
@@ -67,9 +68,24 @@ class Sketch:
     def is_draft(self):
         return self.cfg is None or self.cfg.draft
 
-    def get_pdes(self):
-        p = os.path.join(self.path, '*.pde')
-        return sorted(glob.glob(p))
+    def get_codes(self):
+        paths = self.get_code_paths()
+        codes = []
+        for path in paths:
+            with open(path, 'r', encoding='utf-8') as f:
+                code = f.read()
+            codes.append(CodeInfo(path, code))
+        return codes
+
+    def get_code_paths(self):
+        if self.cfg is None:
+            return []
+        else:
+            paths = []
+            for name in self.cfg.public:
+                paths.append(glob.glob(os.path.join(self.path, name)))
+            paths = list(functools.reduce(lambda x, y: x + y, paths))
+            return sorted(paths)
 
     def get_cover(self):
         if len(self.cfg.cover) > 0:
@@ -87,15 +103,7 @@ class Sketch:
 
 def render_sketch_page(cfg, template, sketch):
 
-    codes = []
-    filenames = []
-    for pde in sketch.get_pdes():
-        with open(pde, 'r', encoding='utf-8') as f:
-            code = f.read()
-        filename = os.path.split(pde)[1]
-
-        codes.append(code)
-        filenames.append(filename)
+    code_infos = sketch.get_codes()
 
     if sketch.get_cover() is not None:
         cover_filename = os.path.split(sketch.get_cover())[1]
@@ -118,7 +126,7 @@ def render_sketch_page(cfg, template, sketch):
         video_embed_code=video_embed_code,
         cover=cover_filename,
         images=image_filenames,
-        code_info=zip(filenames, codes),
+        code_infos=code_infos,
         custom_css=os.path.split(cfg.custom_css)[1]
     )
 
