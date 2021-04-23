@@ -49,7 +49,17 @@ def get_sketch_name(working_dir: str):
 
 
 def generate_pyof():
-    pass
+    env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
+    tpl = env.get_template('sketch/pyof/sketch.py')
+
+    param = {'id': get_sketch_name('.')}
+    output = tpl.render(param).encode('utf-8')
+
+    # Write files
+    make_project_dir(param['id'])
+
+    with open(os.path.join(param['id'], 'sketch.py'), 'wb') as f:
+        f.write(output)
 
 
 def generate_p5js():
