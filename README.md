@@ -60,10 +60,28 @@ pip install git+https://github.com/eqs/yacho.git@v0.0.1
 ### Build site
 
 ```
-yacho yacho.sketchbook.toml
+# v0.0.2+
+yacho build
+
+# v0.0.1
+# yacho yacho.sketchbook.toml
 ```
 
 Push `dist` to your gh-pages.
+
+### Sketch generator
+
+Processing sketch
+
+```
+yacho create
+```
+
+p5.js sketch
+
+```
+yacho create -t p5js
+```
 
 ### Example `yacho.sketchbook.toml`
 
