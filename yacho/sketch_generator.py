@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 import datetime
-import shutil
 from jinja2 import Environment, PackageLoader
 
 
@@ -38,12 +37,14 @@ class OverworkError(RuntimeError):
 def get_sketch_name(working_dir: str):
     now = datetime.datetime.now()
     date = now.strftime('%y%m%d')
-    today_sketch_list = list(filter(lambda x : date in x, os.listdir(working_dir)))
+    today_sketch_list = list(filter(
+        lambda x: date in x, os.listdir(working_dir)
+    ))
     if len(today_sketch_list) <= ord('z') - ord('a'):
         return 'sketch_' + date + generate_id(len(today_sketch_list))
     else:
-        raise OverworkError('You\'ve reached the limit for auto naming of '\
-                            'new sketches for the day. '\
+        raise OverworkError('You\'ve reached the limit for auto naming of '
+                            'new sketches for the day. '
                             'How about going for a walk instead?')
 
 
@@ -55,7 +56,7 @@ def generate_p5js():
     tpl_index = env.get_template('sketch/p5js/index.html')
     tpl_js = env.get_template('sketch/p5js/sketch.js')
 
-    param = {'id' : get_sketch_name('.')}
+    param = {'id': get_sketch_name('.')}
     output_html = tpl_index.render(param).encode('utf-8')
     output_js = tpl_js.render(param).encode('utf-8')
 
@@ -73,7 +74,7 @@ def generate_pde():
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/pde/template.pde')
 
-    param = {'id' : get_sketch_name('.')}
+    param = {'id': get_sketch_name('.')}
     output = tpl.render(param).encode('utf-8')
 
     # Write files
