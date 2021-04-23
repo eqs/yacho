@@ -123,6 +123,10 @@ draft = false
 
 comment = "An example comment."
 
+# Files listed in this value will be public.
+# Default to:
+public = ['*.pde', 'sketch.js', '*.py']
+
 # video embedding will be available v0.0.2
 [video]
 # Please set 'none', 'youtube', 'vimeo', 'neort' or 'gif'

@@ -65,6 +65,24 @@ class VideoConfig:
 
 
 @dataclass
+class CodeInfo:
+    filepath: str
+    code: str
+
+    @property
+    def filename(self):
+        return os.path.split(self.filepath)[1]
+
+    @property
+    def ext(self):
+        return os.path.splitext(self.filepath)[1]
+
+    @property
+    def lang(self):
+        return 'java'
+
+
+@dataclass
 class SketchbookConfig:
     sketchbook_root: str = '.'
     base_url: str = '/'
@@ -86,6 +104,9 @@ class SketchConfig:
     comment: str = ''
 
     video: VideoConfig = field(default_factory=lambda: VideoConfig())
+    public: List[str] = field(default_factory=lambda: [
+        '*.pde', 'sketch.js', '*.py'
+    ])
 
 
 def load_sketchbook_config(path: str):
