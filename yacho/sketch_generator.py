@@ -28,7 +28,23 @@ def generate_id(c):
     if c <= ord('z') - ord('a'):
         return chr(c + ord('a'))
     else:
-        return 'z' + f(c - (ord('z') - ord('a') + 1))
+        return 'z' + generate_id(c - (ord('z') - ord('a') + 1))
+
+
+class OverworkError(RuntimeError):
+    pass
+
+
+def get_sketch_name(working_dir: str):
+    now = datetime.datetime.now()
+    date = now.strftime('%y%m%d')
+    today_sketch_list = list(filter(lambda x : date in x, os.listdir(working_dir)))
+    if len(today_sketch_list) <= ord('z') - ord('a'):
+        return 'sketch_' + date + generate_id(len(today_sketch_list))
+    else:
+        raise OverworkError('You\'ve reached the limit for auto naming of '\
+                            'new sketches for the day. '\
+                            'How about going for a walk instead?')
 
 
 def generate_p5js():
@@ -39,11 +55,7 @@ def generate_p5js():
     tpl_index = env.get_template('sketch/p5js/index.html')
     tpl_js = env.get_template('sketch/p5js/sketch.js')
 
-    now = datetime.datetime.now()
-    date = now.strftime('%y%m%d')
-    today_sketch_list = list(filter(lambda x : date in x, os.listdir('.')))
-
-    param = {'id' : 'sketch_' + date + generate_id(len(today_sketch_list))}
+    param = {'id' : get_sketch_name('.')}
     output_html = tpl_index.render(param).encode('utf-8')
     output_js = tpl_js.render(param).encode('utf-8')
 
@@ -61,13 +73,8 @@ def generate_pde():
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/pde/template.pde')
 
-    now = datetime.datetime.now()
-    date = now.strftime('%y%m%d')
-
-    today_sketch_list = list(filter(lambda x : date in x, os.listdir('.')))
-    param = {'id' : 'sketch_' + date + generate_id(len(today_sketch_list))}
-
-    output = tpl.render({}).encode('utf-8')
+    param = {'id' : get_sketch_name('.')}
+    output = tpl.render(param).encode('utf-8')
 
     # Write files
     make_project_dir(param['id'])
