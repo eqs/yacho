@@ -12,7 +12,7 @@ class ofApp(of.ofPyBaseApp):
         pass
 
     def draw(self):
-        of.ofBackground(0, 255);
+        of.ofBackground(0, 255)
 
 
 if __name__ == '__main__':
