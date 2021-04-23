@@ -79,7 +79,20 @@ class CodeInfo:
 
     @property
     def lang(self):
-        return 'java'
+        if self.ext in ['.pde', '.java']:
+            return 'java'
+        elif self.ext in ['.js']:
+            return 'js'
+        elif self.ext in ['.html']:
+            return 'html'
+        elif self.ext in ['.c', '.cpp', '.h', '.hpp']:
+            return 'cpp'
+        elif self.ext in ['.glsl']:
+            return 'glsl'
+        elif self.ext in ['.py']:
+            return 'python'
+        else:
+            return 'plaintext'
 
 
 @dataclass
