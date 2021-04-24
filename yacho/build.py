@@ -25,8 +25,6 @@ class Sketch:
             self.cfg = None
 
         if self.is_draft():
-            self.cfg.cover = None
-            self.cfg.images = None
             return
 
         # 設定ファイルに画像の記載が無い
