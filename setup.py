@@ -22,7 +22,7 @@ setup(
     license='MIT',
 
     author="eqs",
-    author_email="murashige.satoshi.mi1 [at] gmail.com",
+    author_email="murashige.satoshi.mi1@gmail.com",
 
     description="yacho",
     long_description=read("README.md"),
