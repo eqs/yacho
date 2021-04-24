@@ -17,7 +17,7 @@ def read(filename):
 
 setup(
     name="yacho",
-    version="0.0.2a",
+    version="0.0.2.1",
     url="https://github.com/eqs/yacho",
     license='MIT',
 
