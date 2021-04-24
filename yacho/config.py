@@ -120,7 +120,7 @@ class SketchConfig:
 
     video: VideoConfig = field(default_factory=lambda: VideoConfig())
     public: List[str] = field(default_factory=lambda: [
-        '*.pde', 'sketch.js', '*.py'
+        '*.pde', 'index.html', 'sketch.js', '*.py'
     ])
 
 
