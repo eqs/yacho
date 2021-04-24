@@ -17,7 +17,7 @@ The static site generator for creative coders.
 ## Installation
 
 ```
-pip install git+https://github.com/eqs/yacho.git@v0.0.1
+pip install git+https://github.com/eqs/yacho.git@v0.0.
 ```
 
 ## Usage
