@@ -13,12 +13,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
         <script>hljs.initHighlightingOnLoad();</script>
 
-        {% if cfg.code_line_number %}
+        {% if cfg.code.line_number %}
         <script src="//cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.8.0/dist/highlightjs-line-numbers.min.js"></script>
         <script>hljs.initLineNumbersOnLoad();</script>
         {% endif %}
 
-        {% if cfg.copy_code %}
+        {% if cfg.code.copy_button %}
     <script>
 // https://github.com/ribice/kiss/blob/003f9427f00e4f2d65e88648496c734c76b5fb6d/static/js/copycode.js
 /* global clipboard */
