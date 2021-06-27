@@ -16,6 +16,12 @@ class SocialConfig:
     facebook: str = ''
 
 
+@dataclass
+class CodeConfig:
+    line_number: bool = False
+    copy_button: bool = True
+
+
 class VideoType(Enum):
     none = 0
     youtube = 1
@@ -107,6 +113,7 @@ class SketchbookConfig:
     bio: str = ''
     custom_css: str = ''
 
+    code: CodeConfig = field(default_factory=lambda: CodeConfig())
     social: SocialConfig = field(default_factory=lambda: SocialConfig())
 
 
@@ -130,6 +137,9 @@ def load_sketchbook_config(path: str):
 
     if 'social' in data:
         data.update({'social': SocialConfig(**data['social'])})
+
+    if 'code' in data:
+        data.update({'code': CodeConfig(**data['code'])})
 
     return SketchbookConfig(**data)
 
