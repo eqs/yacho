@@ -23,7 +23,7 @@
             {% endfor %}
         </div>
     </div>
-    {% for code_info in code_infos %}
+    {% for code_info in code_infos -%}
     <h2 class="code-name">{{ code_info.filename }}</h2>
     <pre class="code rounded-lg mx-auto d-block"><code class="{{ code_info.lang }}">{{ code_info.code | e }}</code></pre>
     {% endfor %}
