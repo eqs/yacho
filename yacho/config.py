@@ -107,6 +107,9 @@ class SketchbookConfig:
     bio: str = ''
     custom_css: str = ''
 
+    code_line_number: bool = False
+    copy_code: bool = False
+
     social: SocialConfig = field(default_factory=lambda: SocialConfig())
 
 
