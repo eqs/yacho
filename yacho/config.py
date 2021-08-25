@@ -64,6 +64,11 @@ allowfullscreen="true" allowtransparency="true"></iframe>\
             raise RuntimeError()
 
 
+class GridMode(Enum):
+    card_columns = "card_columns"
+    image_grid = "image_grid"
+
+
 @dataclass
 class VideoConfig:
     type: VideoType = field(default_factory=lambda: VideoType.none)
@@ -112,6 +117,7 @@ class SketchbookConfig:
     avatar: str = ''
     bio: str = ''
     custom_css: str = ''
+    grid_mode: GridMode = GridMode.card_columns
 
     code: CodeConfig = field(default_factory=lambda: CodeConfig())
     social: SocialConfig = field(default_factory=lambda: SocialConfig())

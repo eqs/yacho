@@ -7,7 +7,7 @@ import logging
 from jinja2 import Environment, PackageLoader
 
 from .config import (
-    load_sketch_config, SketchbookConfig, VideoType, CodeInfo
+    load_sketch_config, SketchbookConfig, VideoType, CodeInfo, GridMode
 )
 
 
@@ -148,6 +148,7 @@ def build_site(cfg: SketchbookConfig):
     )
 
     template_index = env.get_template('index.html')
+    template_index.globals['GridMode'] = GridMode
     template_sketch_page = env.get_template('sketch_page.html')
     result_index = template_index.render(
         cfg=cfg,

@@ -43,6 +43,7 @@
     </div>
 
     <div class="container-fluid pt-3">
+        {% if cfg.grid_mode == GridMode.card_columns %}
         <div class="card-columns">
             {% for sketch in sketches %}
             <div class="card">
@@ -55,6 +56,17 @@
             </div>
             {% endfor %}
         </div>
+        {% elif cfg.grid_mode == GridMode.image_grid %}
+        <div class="row">
+            {% for sketch in sketches %}
+            <h5 class="card-title">{{ sketch.title }}</h5>
+            <div class="col-md-6">
+                <img class="rounded mx-auto d-block img-fluid"
+                     src="{{ sketch.cover_url }}">
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 </main>
 {% include "footer.html" %}
