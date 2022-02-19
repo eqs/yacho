@@ -48,11 +48,11 @@ def get_sketch_name(working_dir: str):
                             'How about going for a walk instead?')
 
 
-def generate_pyof():
+def generate_pyof(sketch_name: str):
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/pyof/sketch.py')
 
-    param = {'id': get_sketch_name('.')}
+    param = {'id': sketch_name}
     output = tpl.render(param).encode('utf-8')
 
     # Write files
@@ -62,11 +62,11 @@ def generate_pyof():
         f.write(output)
 
 
-def generate_pyxel():
+def generate_pyxel(sketch_name: str):
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/pyxel/sketch.py')
 
-    param = {'id': get_sketch_name('.')}
+    param = {'id': sketch_name}
     output = tpl.render(param).encode('utf-8')
 
     # Write files
@@ -76,11 +76,11 @@ def generate_pyxel():
         f.write(output)
 
 
-def generate_q5():
+def generate_q5(sketch_name: str):
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/q5/sketch.py')
 
-    param = {'id': get_sketch_name('.')}
+    param = {'id': sketch_name}
     output = tpl.render(param).encode('utf-8')
 
     # Write files
@@ -90,7 +90,7 @@ def generate_q5():
         f.write(output)
 
 
-def generate_p5js():
+def generate_p5js(sketch_name: str):
     env = Environment(loader=PackageLoader(
         'yacho',
         encoding='utf8'
@@ -98,7 +98,7 @@ def generate_p5js():
     tpl_index = env.get_template('sketch/p5js/index.html')
     tpl_js = env.get_template('sketch/p5js/sketch.js')
 
-    param = {'id': get_sketch_name('.')}
+    param = {'id': sketch_name}
     output_html = tpl_index.render(param).encode('utf-8')
     output_js = tpl_js.render(param).encode('utf-8')
 
@@ -112,11 +112,11 @@ def generate_p5js():
         f.write(output_js)
 
 
-def generate_pde():
+def generate_pde(sketch_name: str):
     env = Environment(loader=PackageLoader('yacho', encoding='utf8'))
     tpl = env.get_template('sketch/pde/template.pde')
 
-    param = {'id': get_sketch_name('.')}
+    param = {'id': sketch_name}
     output = tpl.render(param).encode('utf-8')
 
     # Write files
@@ -127,15 +127,20 @@ def generate_pde():
 
 
 def generate_sketch(type='pde'):
+
+    sketch_name = get_sketch_name('.')
+
     if type == 'pde':
-        generate_pde()
+        generate_pde(sketch_name)
     elif type == 'p5js':
-        generate_p5js()
+        generate_p5js(sketch_name)
     elif type == 'pyof':
-        generate_pyof()
+        generate_pyof(sketch_name)
     elif type == 'pyxel':
-        generate_pyxel()
+        generate_pyxel(sketch_name)
     elif type == 'q5':
-        generate_q5()
+        generate_q5(sketch_name)
     else:
         raise RuntimeError(f'Unknown sketch type: {type}')
+
+    print(f'Sketch `{sketch_name}` is created with type `{type}`.')
